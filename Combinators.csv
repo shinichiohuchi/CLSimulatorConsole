@@ -1,0 +1,69 @@
+# --------------------------------------------------
+# << Definition of Combinators >>
+# CombinatorName, ArgsCount, Format
+# --------------------------------------------------
+
+# SKIコンビネータ
+S, 3, 02(12)
+K, 2, 0
+I, 1, 0
+
+# その他のコンビネータ及び、独自関数
+B, 3, 0(12)
+C, 3, 021
+D, 3, 2(K1)0
+#D, 0, C(BC(B(CI)K))
+
+# 原始帰納的関数
+<zero>, 0, KI
+<one>,  0, SB<zero>
+<suc>,  1, SB(0)
+# R関数とsuc関数を使用すると作ることができる?
+<proj>(SB(KI))(SB(KI)), 2, I
+
+<proj>(SB(SB(KI)))(SB(KI)),     3, K
+<proj>(SB(SB(KI)))(SB(SB(KI))), 3, KI
+
+<proj>(SB(SB(SB(KI))))(SB(KI)),         4, S(KK)K
+<proj>(SB(SB(SB(KI))))(SB(SB(KI))),     4, KK
+<proj>(SB(SB(SB(KI))))(SB(SB(SB(KI)))), 4, K(KI)
+
+Q, 2, D(SB(1<zero>))(0(1<zero>)(1<one>))
+#Q, 0, S(K(S(S(KD)(S(K<suc>)(SI(K<zero>))))))(S(S(KS)(S(S(KS)K)(K(SI(K<zero>)))))(K(SI(K<one>))))
+
+# 再起処理関数
+R, 3, 2(Q1)(D<zero>0)<one>
+#R, 0, S(S(KS)(S(K(S(KS)))S(K(S(S(KS)(S(K(SI))(S(KK)Q)))))(S(KK)(S(KK)(D(KI))))))(K(K(K(SB(KI)))))
+
+Y, 2, <suc>1
+<add>, 2, R0Y1
+#<add>, 4, 02(123)
+#<Y>, 2, <add>
+#<mult>, 2, R<zero>(<add>03)1
+
+# --------------------------------------------------
+# ものまね鳥をまねる
+# --------------------------------------------------
+
+##true
+#<t>, 0, K
+##false
+#<f>, 0, KI
+#
+## チャーチ数関数
+##zero関数
+##<zero>, 0, I
+##<one>, 0, V<f><zero>
+#
+## 計算関数
+#<plus>, 2, Z10(σ(<plus>0(P1)))
+#<multiple>, 2, (Z1)<zero>((<plus>)(<multiple>(0(P1))0))
+#
+## 条件分岐関数Z(ゼロテスター)
+#Z, 1, T<t>0
+#T, 2, 10
+#V, 3, 201
+#
+## suc関数
+#P, 1, T<f>0
+#σ, 0, V<f>
