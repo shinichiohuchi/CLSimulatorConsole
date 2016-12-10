@@ -27,7 +27,7 @@ CLSimulatorConsoleはコンビネータ文字列(以下CLCode)を計算して表
 このファイルを編集することで新たにコンビネータを追加するが可能です。
 
 ##使い方
-1. ターミナルから"java -jar clsc.jar FileName.txt -options"と入力してください。  
+1. ターミナルから"java -jar clsc.jar FileName.txt [-options]"と入力してください。  
  -optionsは後述のオプション一覧から確認してください。
 2. FileName.txtには1行に1つのCLCodeを記述します。  
  読み込むファイルには以下の制約があります。
