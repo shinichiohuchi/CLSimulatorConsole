@@ -16,24 +16,31 @@
 * Javaバージョン:  
   1.8.0-111  
 
-##Overview
+##概要
+CLSimulatorConsoleはコンビネータ文字列(以下CLCode)を計算して表示するためのソフトウェアです。
 
-##Usage
-1. Type "java -jar clsc.jar FileName.txt -options" on terminal.
+コマンドライン引数からCLCodeを記述したファイルを渡すことで計算をします。  
+または、ファイルを渡さなかった場合はキーボードからCLCodeの入力を促します。
 
-2. FileName.txt is CLCode file.
+コンビネータは実行ファイルと同階層のCombinators.csvというファイルから読み込まれます。  
+このファイルが存在しなかった場合、初期でSKIBCの5つのコンビネータのみ定義したファイルを生成し、読み込みます。  
+このファイルを編集することで新たにコンビネータを追加するが可能です。
 
-   Format is this.
-   # comment is usable.
-   Sxyz
-   # empty line is usable
+##使い方
+1. ターミナルから"java -jar clsc.jar FileName.txt -options"と入力してください。  
+-optionsは後述のオプション一覧から確認してください。
 
-3. -options is this.
+2. FileName.txtには1行に1つのCLCodeを記述します。  
+読み込むファイルには以下の制約があります。
 
-   -s[ilent] : Show only calculation result.
+    # '#'で始まる行はコメント行として無視されます。
+    # ただし、インラインコメントといった使用はできません。
+    # Sxyz -> xz(yz)
+    Sxyz
+    # 改行のみの行は無視されます。
 
-   -w[ait] number : Wait number millstime every calculation step.
-
-   -l[ist] : Show list that combinator has.
-
-   -n[oindent] : Hide indent format.
+##オプション一覧
+-s[ilent] : 計算結果のみを表示します。
+-w[ait] number : 計算ステップ間の待ち時間をミリ秒単位で指定します。
+-l[ist] : 計算中のコンビネータの保持するリストを表示します。
+-n[oindent] : インデント整形を行いません。
